@@ -15,7 +15,6 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.8'
   s.requires_arc = true
 
-  s.source_files = 'Classes/*.{h,m}'
-
-  s.public_header_files = 'Classes/BTKInjector.h','Classes/BTKInjectorBinding.h','Classes/BTKInjectorBindingBase.h','Classes/BTKInjectorFactory.h','Classes/BTKInjectorFactoryBase.h','Classes/BTKInjectorProvider.h','Classes/BTKInjectorProviderBase.h'
+  s.source_files = 'Classes/**/*.{h,m}'
+  s.public_header_files = 'Classes/*.h'
 end
