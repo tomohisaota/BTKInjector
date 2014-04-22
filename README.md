@@ -197,8 +197,12 @@ Above Core Data example uses Block based definition.
 ### Subclass BTKInjectorProviderBase
 Just like Factory, you can subclass BTKInjectorProviderBase to write your own provider class.
 
+# Circular dependency
+If two components depends on each other in **intialize sequence**, BTKInjector cannot create object. Chicken or egg problem.
 
-# Looking for more powerful DI framework?
+Circular dependency after object intialization is totally fine. So inject Provider instead of Instance whereever possible.
+
+# Looking for more powerful framework?
 BTKInjector is designed for simplicity.
 
 If you're looking for more powerful DI framework, [Typhoon Framework](http://www.typhoonframework.org) may be the right choice.
