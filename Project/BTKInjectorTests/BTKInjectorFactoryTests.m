@@ -20,9 +20,10 @@
 
 @implementation BTKInjectorFactoryTests
 
-- (void)setUp
++ (void)setUp
 {
     [super setUp];
+    [BTKGlobalInjector removeGlobalInjector];
     [BTKGlobalInjector setupGlobalInjector:^(id<BTKMutableInjector> mInjector) {
         [mInjector bindProtocol:@protocol(BTKTestProtocol1)
                 toProviderBlock:^id(id<BTKInjector> i) {
@@ -40,11 +41,6 @@
                     return o;
                 }];
     }];
-}
-
-- (void)tearDown
-{
-    [super tearDown];
 }
 
 - (void)testGlobalInjector

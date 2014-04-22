@@ -42,8 +42,11 @@
 // Get global injector
 + (id<BTKInjector>) get;
 
-// Intialize Global Injector
+// Intialize Global Injector, can be called only once
 + (void) setupGlobalInjector : (void(^)(id<BTKMutableInjector> mInjector))initBlock;
+
+// Remove Global Injector
++ (void) removeGlobalInjector;
 
 // Create injector. Useful for unit test
 + (id<BTKInjector>) injectorWithBlock : (void(^)(id<BTKMutableInjector> mInjector))initBlock;

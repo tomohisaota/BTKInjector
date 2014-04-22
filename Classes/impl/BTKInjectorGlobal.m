@@ -16,21 +16,40 @@ static id<BTKInjector> globalInjector;
 + (id<BTKInjector>) get
 {
     @synchronized(self){
+        if(globalInjector == nil){
+            [NSException raise:NSInternalInconsistencyException
+                        format:@"Global Injector is not set"];
+            return nil;
+        }
         return globalInjector;
     }
 }
 
 + (void) setupGlobalInjector : (void(^)(id<BTKMutableInjector> mInjector))initBlock
 {
+    NSLog(@"Setting Global Injector");
     @synchronized(self){
+        if(globalInjector != nil){
+            [NSException raise:NSInternalInconsistencyException
+                        format:@"Global injector is already set"];
+            return;
+        }
         globalInjector = [self injectorWithBlock:initBlock];
+    }
+}
+
++ (void) removeGlobalInjector
+{
+    @synchronized(self){
+        globalInjector = nil;
     }
 }
 
 + (id<BTKInjector>) injectorWithBlock : (void(^)(id<BTKMutableInjector> mInjector))initBlock
 {
     if(initBlock == nil){
-
+        [NSException raise:NSInternalInconsistencyException
+                    format:@"initBlock cannot be nil"];
         return nil;
     }
     BTKMutableInjectorImpl *mInjector = [BTKMutableInjectorImpl new];
