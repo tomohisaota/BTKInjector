@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>58649D9A-2F4C-49E1-9B15-6237BBEDB3E0</string>
+	<key>IDESourceControlProjectName</key>
+	<string>BTKInjector</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>1F16B2BF-5041-4335-A188-CF953AEEC27E</key>
+		<string>https://github.com/tomohisaota/BTKInjector.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Project/BTKInjector/BTKInjector.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>1F16B2BF-5041-4335-A188-CF953AEEC27E</key>
+		<string>../../../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/tomohisaota/BTKInjector.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>1F16B2BF-5041-4335-A188-CF953AEEC27E</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>1F16B2BF-5041-4335-A188-CF953AEEC27E</string>
+			<key>IDESourceControlWCCName</key>
+			<string>BTKInjector</string>
+		</dict>
+	</array>
+</dict>
+</plist>
