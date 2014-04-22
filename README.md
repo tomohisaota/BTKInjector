@@ -2,6 +2,22 @@
 
 Simple DI(Dependency Injection) Framework designed for Objective C.
 
+# How to install
+BTKInjector is available on [Cocoa Pods](http://cocoapods.org)
+
+## Install from Cocoa Pods master
+
+```
+pod 'BTKInjector', '~> 1.0.0'
+```
+
+## Install from git repository
+
+```
+pod 'BTKInjector', :git => 'https://github.com/tomohisaota/BTKInjector.git'
+```
+
+
 # Basic Concept of Dependency Injection
 See [Dependency Injection on Wikipedia](http://en.wikipedia.org/wiki/Dependency_injection)
 > Dependency injection is a software design pattern that implements inversion of control and allows a program design to follow the dependency inversion principle. 
