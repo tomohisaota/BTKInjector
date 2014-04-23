@@ -18,26 +18,32 @@
 
 - (id)get
 {
+    // 1st check without synchronized
     if(_obj == nil){
         @synchronized(self){
-            if(_injecting){
-                [NSException raise:NSInternalInconsistencyException
-                            format:@"Circular reference detected for %@", self.description];
-                return nil;
-            }
-            _injecting = YES;
-            id obj = [self getImpl];
-            OSMemoryBarrier();
-            _obj = obj;
-            _injecting = NO;
+            // 2nd check with synchronized
+            if(_obj == nil){
+                if(_injecting){
+                    [NSException raise:NSInternalInconsistencyException
+                                format:@"Circular reference detected for %@", self.description];
+                    return nil;
+                }
+                _injecting = YES;
+                id obj = [self getImpl];
+                // Make sure that obj is ready to use
+                OSMemoryBarrier();
+                _obj = obj;
+                _injecting = NO;
 
-            if(![_obj conformsToProtocol:self.targetProtocol]){
-                [NSException raise:NSInternalInconsistencyException
-                            format:@"Object from %@ provider does not confirm to its protocol", self.description];
-                
+                if(![_obj conformsToProtocol:self.targetProtocol]){
+                    [NSException raise:NSInternalInconsistencyException
+                                format:@"Object from %@ provider does not confirm to its protocol", self.description];
+                    
+                }
             }
         }
     }
+    // Make sure that _obj is ready to use
     OSMemoryBarrier();
     return _obj;
 }
