@@ -9,7 +9,7 @@
 //  Ref : https://www.mikeash.com/pyblog/friday-qa-2009-10-02-care-and-feeding-of-singletons.html
 
 #import "BTKInjectorProviderBase.h"
-#include "libkern/OSAtomic.h"
+#import <libkern/OSAtomic.h>
 
 @implementation BTKInjectorProviderBase{
     id volatile _obj;

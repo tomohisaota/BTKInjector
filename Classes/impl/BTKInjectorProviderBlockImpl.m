@@ -7,7 +7,6 @@
 //
 
 #import "BTKInjectorProviderBlockImpl.h"
-#import <libkern/OSAtomic.h>
 
 @implementation BTKInjectorProviderBlockImpl{
     id _obj;
