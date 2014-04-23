@@ -200,9 +200,9 @@
 		EAE583BB1904B6A90028686F /* impl */ = {
 			isa = PBXGroup;
 			children = (
+				EA818E7B19072FEB000E123C /* BTKGlobalInjector.m */,
 				EA818E7919072FEB000E123C /* BTKInjectorBindingBase.m */,
 				EA818E7A19072FEB000E123C /* BTKInjectorFactoryBase.m */,
-				EA818E7B19072FEB000E123C /* BTKGlobalInjector.m */,
 				EA818E7C19072FEB000E123C /* BTKInjectorImpl.h */,
 				EA818E7D19072FEB000E123C /* BTKInjectorImpl.m */,
 				EA818E7E19072FEB000E123C /* BTKInjectorProviderBase.m */,

@@ -5,36 +5,41 @@
 //  Created by Tomohisa Ota on 2014/04/22.
 //  Copyright (c) 2014 Tomohisa Ota. All rights reserved.
 //
+//  Use volatile object with OSMemoryBarrier to avoid locking
+//  Ref : https://www.mikeash.com/pyblog/friday-qa-2009-10-02-care-and-feeding-of-singletons.html
 
 #import "BTKInjectorProviderBase.h"
+#include "libkern/OSAtomic.h"
 
 @implementation BTKInjectorProviderBase{
-    id _obj;
+    id volatile _obj;
     BOOL _injecting;
 }
 
 - (id)get
 {
-    // TODO: consider lock free implementation
-    // Maybe using OSAtomicCompareAndSwapPtrBarrier, but Is it worth doing?
-    @synchronized(self){
-        if(_obj == nil){
+    if(_obj == nil){
+        @synchronized(self){
             if(_injecting){
                 [NSException raise:NSInternalInconsistencyException
                             format:@"Circular reference detected for %@", self.description];
                 return nil;
             }
             _injecting = YES;
-            _obj = [self getImpl];
+            id obj = [self getImpl];
+            OSMemoryBarrier();
+            _obj = obj;
             _injecting = NO;
+
             if(![_obj conformsToProtocol:self.targetProtocol]){
                 [NSException raise:NSInternalInconsistencyException
                             format:@"Object from %@ provider does not confirm to its protocol", self.description];
                 
             }
         }
-        return _obj;
     }
+    OSMemoryBarrier();
+    return _obj;
 }
 
 - (id)getImpl
