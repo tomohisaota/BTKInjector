@@ -34,4 +34,9 @@
 	return sig;
 }
 
+- (BOOL)conformsToProtocol:(Protocol *)aProtocol
+{
+    return [_provider.get conformsToProtocol:aProtocol];
+}
+
 @end

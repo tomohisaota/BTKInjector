@@ -80,6 +80,8 @@
         }];
         id<BTKTestProtocol1> o = [injector instanceForProtocol:@protocol(BTKTestProtocol1)];
         XCTAssertTrue([o conformsToProtocol:@protocol(BTKTestProtocol1)]);
+        XCTAssertTrue([o.protocol2 conformsToProtocol:@protocol(BTKTestProtocol2)]);
+        XCTAssertTrue([o.protocol2.protocol3 conformsToProtocol:@protocol(BTKTestProtocol3)]);
         XCTAssertEqual(@"test1", o.test1);
         XCTAssertEqual(@"test2", o.protocol2.test2);
         XCTAssertEqual(@"test3", o.protocol2.protocol3.test3);
@@ -117,6 +119,8 @@
     }];
     id<BTKTestProtocol1> o = [injector instanceForProtocol:@protocol(BTKTestProtocol1)];
     XCTAssertTrue([o conformsToProtocol:@protocol(BTKTestProtocol1)]);
+    XCTAssertTrue([o.protocol2 conformsToProtocol:@protocol(BTKTestProtocol2)]);
+    XCTAssertTrue([o.protocol2.protocol3 conformsToProtocol:@protocol(BTKTestProtocol3)]);
     XCTAssertEqual(@"test1", o.test1);
     XCTAssertEqual(@"test2", o.protocol2.test2);
     XCTAssertEqual(@"test3", o.protocol2.protocol3.test3);
@@ -148,6 +152,8 @@
     }];
     id<BTKTestProtocol1> o = [injector instanceForProtocol:@protocol(BTKTestProtocol1)];
     XCTAssertTrue([o conformsToProtocol:@protocol(BTKTestProtocol1)]);
+    XCTAssertTrue([o.protocol2 conformsToProtocol:@protocol(BTKTestProtocol2)]);
+    XCTAssertTrue([o.protocol2.protocol3 conformsToProtocol:@protocol(BTKTestProtocol3)]);
     XCTAssertEqual(@"test1", o.test1);
     XCTAssertEqual(@"test2", o.protocol2.test2);
     XCTAssertEqual(@"test3", o.protocol2.protocol3.test3);
