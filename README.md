@@ -11,10 +11,10 @@ BTKInjector is available on [Cocoa Pods](http://cocoapods.org)
 pod 'BTKInjector', '~> 1.0.0'
 ```
 
-## Install from git repository
+## Install from github develop branch
 
 ```
-pod 'BTKInjector', :git => 'https://github.com/tomohisaota/BTKInjector.git'
+pod 'BTKInjector', :git => 'https://github.com/tomohisaota/BTKInjector.git', :branch => "develop"
 ```
 
 

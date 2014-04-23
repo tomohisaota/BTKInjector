@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "BTKInjector"
-  s.version          = "1.0.2"
+  s.version          = "1.0.3"
   s.summary          = "DI Framework for Objective-C"
   s.description      = <<-DESC
                        Simple DI(Dependency Injection) Framework designed for Objective C 
@@ -15,6 +15,16 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.8'
   s.requires_arc = true
 
-  s.source_files = 'Classes/**/*.{h,m}'
-  s.public_header_files = 'Classes/*.h'
+  s.source_files = 'Classes/*.{h,m}'
+
+  s.default_subspec = 'Main'
+  s.subspec 'Main' do |ss|
+    ss.dependency 'BTKInjector/Impl'
+  end
+
+  s.subspec 'Impl' do |ss|
+    ss.source_files = 'Classes/Impl/*.{h,m}'
+    ss.private_header_files = 'Classes/Impl/*.h'
+  end
+
 end
