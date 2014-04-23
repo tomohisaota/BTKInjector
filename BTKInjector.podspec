@@ -15,16 +15,7 @@ Pod::Spec.new do |s|
   s.osx.deployment_target = '10.8'
   s.requires_arc = true
 
-  s.source_files = 'Classes/*.{h,m}'
-
-  s.default_subspec = 'Main'
-  s.subspec 'Main' do |ss|
-    ss.dependency 'BTKInjector/Impl'
-  end
-
-  s.subspec 'Impl' do |ss|
-    ss.source_files = 'Classes/Impl/*.{h,m}'
-    ss.private_header_files = 'Classes/Impl/*.h'
-  end
+  s.source_files = 'Classes/**/*.{h,m}'
+  s.private_header_files = 'Classes/Impl/*.h'
 
 end
