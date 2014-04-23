@@ -24,6 +24,9 @@
 // Import other headers
 #import "BTKGlobalInjector.h"
 #import "BTKMutableInjector.h"
-#import "BTKInjectorBinding.h"
+
 #import "BTKInjectorProvider.h"
+#import "BTKInjectorProviderBase.h"
+
 #import "BTKInjectorFactory.h"
+#import "BTKInjectorFactoryBase.h"
