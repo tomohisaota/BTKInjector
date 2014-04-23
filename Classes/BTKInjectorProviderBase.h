@@ -11,6 +11,7 @@
 
 @interface BTKInjectorProviderBase : BTKInjectorBindingBase<BTKInjectorProvider>
 
+/// getImpl get called only once
 - (id) getImpl;
 
 @end

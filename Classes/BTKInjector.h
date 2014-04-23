@@ -8,47 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
-// Biding Protocols
-#import "BTKInjectorBinding.h"
-#import "BTKInjectorProvider.h"
-#import "BTKInjectorFactory.h"
-
 @protocol BTKInjector <NSObject>
 
-// Syntax sugar. Same as providerForProtocol + get
+/// Get instance for given protocol. syntax sugar for provider + get
 - (id) instanceForProtocol : (Protocol *)protocol;
 
+/// Get provider for given protocol. calling provider returns singleton instance
 - (id) providerForProtocol : (Protocol *)protocol;
 
+/// Get factory for given protocol. calling factory create new instance
 - (id) factoryForProtocol : (Protocol *)protocol;
 
 @end
 
-
-@protocol BTKMutableInjector <BTKInjector>
-
-- (void) bindProtocol : (Protocol *)protocol
-      toProviderBlock : (id(^)(id<BTKInjector> injector))getBlock;
-
-- (void) bindProvider : (id<BTKInjectorProvider>)provider;
-
-- (void) bindFactory : (id<BTKInjectorFactory>)factory;
-
-@end
-
-
-@interface BTKGlobalInjector : NSObject
-
-// Get global injector
-+ (id<BTKInjector>) get;
-
-// Intialize Global Injector, can be called only once
-+ (void) setupGlobalInjector : (void(^)(id<BTKMutableInjector> mInjector))initBlock;
-
-// Remove Global Injector
-+ (void) removeGlobalInjector;
-
-// Create injector. Useful for unit test
-+ (id<BTKInjector>) injectorWithBlock : (void(^)(id<BTKMutableInjector> mInjector))initBlock;
-
-@end
+// Import other headers
+#import "BTKGlobalInjector.h"
+#import "BTKMutableInjector.h"
+#import "BTKInjectorBinding.h"
+#import "BTKInjectorProvider.h"
+#import "BTKInjectorFactory.h"

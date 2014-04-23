@@ -78,7 +78,15 @@
     }
 }
 
-
+- (void) removeBindingForProtocol : (Protocol *)protocol
+{
+    if(protocol == nil){
+        return;
+    }
+    @synchronized(self){
+        [_bindDictionary removeObjectForKey:NSStringFromProtocol(protocol)];
+    }
+}
 
 #pragma mark BTKInjector
 

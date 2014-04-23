@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Tomohisa Ota. All rights reserved.
 //
 
-#import "BTKInjector.h"
+#import "BTKGlobalInjector.h"
 #import "BTKMutableInjectorImpl.h"
 
 static id<BTKInjector> globalInjector;
