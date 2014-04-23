@@ -1,159 +1,74 @@
 # BTKInjector
 
-Simple DI(Dependency Injection) Framework designed for Objective C.
+BTKInjector is Dependency Injection Framework for Objective C. It supports Singleton Provider and Factory binding by protocol. 
 
-# How to install
+Binding
+
+```objc:BTKMutableInjector.h
+@protocol BTKMutableInjector <BTKInjector>
+- (void) bindProtocol : (Protocol *)protocol
+      toProviderBlock : (id(^)(id<BTKInjector> injector))getBlock;
+- (void) bindProvider : (id<BTKInjectorProvider>)provider;
+- (void) bindFactory : (id<BTKInjectorFactory>)factory;
+- (void) removeBindingForProtocol : (Protocol *)protocol;
+@end
+```
+
+Injecting
+
+```objc:BTKInjector.h
+@protocol BTKInjector <NSObject>
+- (id) instanceForProtocol : (Protocol *)protocol;
+- (id) proxyForProtocol : (Protocol *)protocol;
+- (id) providerForProtocol : (Protocol *)protocol;
+- (id) factoryForProtocol : (Protocol *)protocol;
+@end
+```
+
+## How to install
 BTKInjector is available on [Cocoa Pods](http://cocoapods.org)
 
-## Install from Cocoa Pods master
 
 ```
 pod 'BTKInjector', '~> 1.0.3'
 ```
-
-## Install from github develop branch
+or you can use latest code from github
 
 ```
 pod 'BTKInjector', :git => 'https://github.com/tomohisaota/BTKInjector.git', :branch => "develop"
 ```
 
+## Bind Provider to protocol
+BTKInjector will return same object for given protocol. 
+Your object creation code **get called only once**.
 
-# Basic Concept of Dependency Injection
-See [Dependency Injection on Wikipedia](http://en.wikipedia.org/wiki/Dependency_injection)
-> Dependency injection is a software design pattern that implements inversion of control and allows a program design to follow the dependency inversion principle. 
-
-
-## How DI can help me?
-Some people say that Objective C is dynamic language and does not need DI. But that is not true at all. DI itself is powerful concept suitable for objective C, and DI container makes DI even better.
-
-One example is Core Data related code. XCode template puts those code in AppDelegate. But does it really have to be there? How do you test the code?
-
-I will walk through the exmaple to show you how DI can help you.
-
-### Define protocol for CoreData
-First step is to define protocol. For core data, you typically need 3 properties.
-
-```objc:BTKCoreData.h
-@protocol BTKCoreData <NSObject>
-
-@property(strong,readonly,nonatomic) NSManagedObjectModel *managedObjectModel;
-@property(strong,readonly,nonatomic) NSPersistentStoreCoordinator *persistentStoreCoordinator;
-@property(strong,readonly,nonatomic) NSManagedObjectContext *managedObjectContext;
-
-@end
-
-```
-
-### Implement CoreData protocol
-Implement CoreData protocol in anywhere you want.
-
-```objc:BTKCoreDataImpl.h
-#import <Foundation/Foundation.h>
-#import "BTKCoreData.h"
-
-@interface BTKCoreDataImpl : NSObject<BTKCoreData>
-
-@end
-```
-
-```objc:BTKCoreData.m
-#import "BTKCoreDataImpl.h"
-#import <CoreData/CoreData.h>
-
-@implementation BTKCoreDataImpl
-
-- (NSManagedObjectModel *)managedObjectModel
-{
-    // Put your code here
-}
-
-- (NSPersistentStoreCoordinator *)persistentStoreCoordinator
-{
-    // Put your code here
-}
-
-- (NSManagedObjectContext *)managedObjectContext
-{
-    // Put your code here
-}
-```
+### By provider block
 
 
-### Use Core data
-Instead of accessing Application Delegate, you can give Core Data instance in intialization.
-This is called "Constructor Injection", one of the dependeny injection style.
-
-```objc:BTKYourClass.h
-@protocol BTKYourClass <NSObject>
-
-@end
-```
-
-
-```objc:BTKYourClassImpl.h
-@interface BTKYourClassImpl : NSObject<BTKYourClass>
-
-@property(strong,readonly,nonatomic) id<BTKCoreData> coreData;
-
-- (id)initWithCoreData : (id<BTKCoreData>) coreData;
-
-@end
-```
-
-```objc:BTKYourClassImpl.m
-@implement BTKYourClassImpl
-
-- (id)initWithCoreData : (id<BTKCoreData>) coreData
-{
-    self = [super init];
-    if(!self){
-        return nil;
-    }
-    _coreData = coreData;
-    return self;
-}
-
-@end
-```
-
-### Connect those components by DI container
-Finally, you need to setup injection as follow
-
-* Return BTKCoreDataImpl instance for BTKCoreData protocol
-* Return BTKYourClassImpl instance for BTKYourClass protocol
- *  Inject BTKCoreData in intialization
-
-Here is how you can do it using BTKInjector
-
-```objc:binding
+```objc
     [BTKGlobalInjector setupGlobalInjector:^(id<BTKMutableInjector> mInjector) {
-        [mInjector bindProtocol:@protocol(BTKCoreData)
+        [mInjector bindProtocol:@protocol(BTKTestProtocol1)
                 toProviderBlock:^id(id<BTKInjector> i) {
-                    return [BTKCoreDataImpl new];
-                }];
-        [mInjector bindProtocol:@protocol(BTKYourClass)
-                toProviderBlock:^id(id<BTKInjector> i) {
-                    return [[BTKYourClassImpl alloc] initWithCoreData:[i instanceForProtocol:@protocol(BTKCoreData)]];
+                    BTKTestProtocol1Impl *o = [BTKTestProtocol1Impl new];
+                    o.protocol2Provider = [i providerForProtocol:@protocol(BTKTestProtocol2)];
+                    return o;
                 }];
     }];
 ```
 
-Finnaly, you can ask injector to get instance.
+### Inject provider
+Inject BTKInjectorProvider, and you can get target instance by calling "get".
 
-```objc:getting
-id<BTKYourClass> i = [[BTKGlobalInjector get]instanceForProtocol:@protocol(BTKYourClass)];
+### Inject instance
+Syntax sugar. Equivalent to provider injection + "get".
 
-```
+### Inject proxy
+Return proxy object which has reference to provider. It acts just like instance injection, but does not call provider.get until necessary.
 
-
-# BTKInjector
-In BTKInjector, you need to write binding for each protocol. binding can be Provider or Factory. Either way, you need to write object creation code for the protocol.
-
-## Factory
+## Bind Factory to protocol
 BTKInjector will return newly created object for given protocol. 
 Your object creation code **get called everytime**.
 
-### Subclass BTKInjectorFactoryBase
 
 Define protocol for Factory.
 
@@ -200,25 +115,15 @@ Register binding to injector.
 [mInjector bindFactory:[BTKSampleFactoryFactoryImpl new]];
 ```
 
+### Inject factory by protocol
 
-## Provider
-BTKInjector will return same object for given protocol. 
-Your object creation code **get called only once**.
-In other word, it is singleton per injector.
 
-### Use block
-Since method signature for provider is always same, you can write binding using block.
-Above Core Data example uses Block based definition.
 
-### Subclass BTKInjectorProviderBase
-Just like Factory, you can subclass BTKInjectorProviderBase to write your own provider class.
 
-# Circular dependency
+## Circular dependency
 If two components depends on each other in **intialize sequence**, BTKInjector cannot create object. Chicken or egg problem.
 
-Circular dependency after object intialization is totally fine. So inject Provider instead of Instance whereever possible.
+Circular dependency after object intialization is totally fine. So inject Proxy or Provider instead of Instance whereever possible.
 
-# Looking for more powerful framework?
-BTKInjector is designed for simplicity.
-
-If you're looking for more powerful DI framework, [Typhoon Framework](http://www.typhoonframework.org) may be the right choice.
+## License
+BTKInjector is created and maintained by Tomohisa Ota under the Apache 2.0 license.
