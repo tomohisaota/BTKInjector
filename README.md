@@ -8,7 +8,7 @@ BTKInjector is available on [Cocoa Pods](http://cocoapods.org)
 ## Install from Cocoa Pods master
 
 ```
-pod 'BTKInjector', '~> 1.0.0'
+pod 'BTKInjector', '~> 1.0.3'
 ```
 
 ## Install from github develop branch
