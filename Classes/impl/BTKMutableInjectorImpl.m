@@ -98,6 +98,11 @@
     return [self.copy instanceForProtocol:protocol];
 }
 
+- (id)proxyForProtocol:(Protocol *)protocol
+{
+    return [self.copy proxyForProtocol:protocol];
+}
+
 - (id<BTKInjectorProvider>) providerForProtocol : (Protocol *)protocol
 {
     return [self.copy providerForProtocol:protocol];

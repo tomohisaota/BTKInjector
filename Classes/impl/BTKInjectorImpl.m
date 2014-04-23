@@ -8,6 +8,7 @@
 
 #import "BTKInjectorImpl.h"
 #import "BTKMutableInjectorImpl.h"
+#import "BTKInjectorProxy.h"
 
 @implementation BTKInjectorImpl{
     NSDictionary *_bindDictionary;
@@ -40,6 +41,11 @@
 - (id) instanceForProtocol : (Protocol *)protocol
 {
     return ((id<BTKInjectorProvider>)[self providerForProtocol:protocol]).get;
+}
+
+- (id) proxyForProtocol : (Protocol *)protocol;
+{
+    return [[BTKInjectorProxy alloc] initWithProvider:[self providerForProtocol:protocol]];
 }
 
 - (id<BTKInjectorProvider>) providerForProtocol : (Protocol *)protocol

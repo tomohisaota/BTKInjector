@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA7B872A1907AF53007105D5 /* BTKInjectorProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7B87291907AF53007105D5 /* BTKInjectorProxy.m */; };
 		EA818E8319072FEB000E123C /* BTKInjectorBindingBase.m in Sources */ = {isa = PBXBuildFile; fileRef = EA818E7919072FEB000E123C /* BTKInjectorBindingBase.m */; };
 		EA818E8419072FEB000E123C /* BTKInjectorFactoryBase.m in Sources */ = {isa = PBXBuildFile; fileRef = EA818E7A19072FEB000E123C /* BTKInjectorFactoryBase.m */; };
 		EA818E8519072FEB000E123C /* BTKGlobalInjector.m in Sources */ = {isa = PBXBuildFile; fileRef = EA818E7B19072FEB000E123C /* BTKGlobalInjector.m */; };
@@ -53,6 +54,8 @@
 /* Begin PBXFileReference section */
 		EA2E2ECA190742FC00D97B40 /* BTKMutableInjector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BTKMutableInjector.h; path = ../../Classes/BTKMutableInjector.h; sourceTree = "<group>"; };
 		EA2E2ECB1907439300D97B40 /* BTKGlobalInjector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BTKGlobalInjector.h; path = ../../Classes/BTKGlobalInjector.h; sourceTree = "<group>"; };
+		EA7B87281907AF53007105D5 /* BTKInjectorProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BTKInjectorProxy.h; path = ../../Classes/impl/BTKInjectorProxy.h; sourceTree = "<group>"; };
+		EA7B87291907AF53007105D5 /* BTKInjectorProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BTKInjectorProxy.m; path = ../../Classes/impl/BTKInjectorProxy.m; sourceTree = "<group>"; };
 		EA818E7919072FEB000E123C /* BTKInjectorBindingBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BTKInjectorBindingBase.m; path = ../../Classes/impl/BTKInjectorBindingBase.m; sourceTree = "<group>"; };
 		EA818E7A19072FEB000E123C /* BTKInjectorFactoryBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BTKInjectorFactoryBase.m; path = ../../Classes/impl/BTKInjectorFactoryBase.m; sourceTree = "<group>"; };
 		EA818E7B19072FEB000E123C /* BTKGlobalInjector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BTKGlobalInjector.m; path = ../../Classes/impl/BTKGlobalInjector.m; sourceTree = "<group>"; };
@@ -208,6 +211,8 @@
 				EA818E7E19072FEB000E123C /* BTKInjectorProviderBase.m */,
 				EA818E7F19072FEB000E123C /* BTKInjectorProviderBlockImpl.h */,
 				EA818E8019072FEB000E123C /* BTKInjectorProviderBlockImpl.m */,
+				EA7B87281907AF53007105D5 /* BTKInjectorProxy.h */,
+				EA7B87291907AF53007105D5 /* BTKInjectorProxy.m */,
 				EA818E8119072FEB000E123C /* BTKMutableInjectorImpl.h */,
 				EA818E8219072FEB000E123C /* BTKMutableInjectorImpl.m */,
 			);
@@ -301,6 +306,7 @@
 				EA818E8919072FEB000E123C /* BTKMutableInjectorImpl.m in Sources */,
 				EA818E8419072FEB000E123C /* BTKInjectorFactoryBase.m in Sources */,
 				EA818E8519072FEB000E123C /* BTKGlobalInjector.m in Sources */,
+				EA7B872A1907AF53007105D5 /* BTKInjectorProxy.m in Sources */,
 				EA818E8719072FEB000E123C /* BTKInjectorProviderBase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

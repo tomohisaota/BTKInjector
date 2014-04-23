@@ -13,6 +13,9 @@
 /// Get instance for given protocol. syntax sugar for provider + get
 - (id) instanceForProtocol : (Protocol *)protocol;
 
+/// Get proxy for given protocol. proxy object calls provider when needed
+- (id) proxyForProtocol : (Protocol *)protocol;
+
 /// Get provider for given protocol. calling provider returns singleton instance
 - (id) providerForProtocol : (Protocol *)protocol;
 
