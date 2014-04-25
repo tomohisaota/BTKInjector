@@ -10,7 +10,7 @@
 #import "BTKInjector.h"
 #import "BTKTestProtocol.h"
 #import "BTKTestProtocol1Impl.h"
-#import "BTKInjectorProtocolOverrideProxy.h"
+#import "BTKInjectorProxyProtocolOverride.h"
 
 @interface BTKInjectorDuckTypingTests : XCTestCase
 
@@ -27,14 +27,15 @@
                        return [BTKTestProtocol1Impl new];
                    }];
         }];
-        [injector instanceFor:@protocol(BTKTestProtocol4)];
+        id<BTKTestProtocol4> obj = [injector proxyFor:@protocol(BTKTestProtocol4)];
+        [obj test1];
     }
     @catch (NSException *exception) {
         XCTAssertTrue(([exception.reason rangeOfString:@"does not conforms"].location != NSNotFound) ,
                       @"Exception type is not correct %@",exception);
         return;
     }
-    XCTFail(@"Circular Reference was not detected");
+    XCTFail(@"Protocol mismatch did not detected");
 }
 
 - (void)testWithDuckTyping
@@ -46,7 +47,7 @@
                     return [BTKTestProtocol1Impl new];
                 }];
     }];
-    [injector instanceFor:@protocol(BTKTestProtocol4)];
+    [injector proxyFor:@protocol(BTKTestProtocol4)];
 }
 
 @end

@@ -6,13 +6,13 @@
 //  Copyright (c) 2014 Tomohisa Ota. All rights reserved.
 //
 
-#import "BTKInjectorProxy.h"
+#import "BTKInjectorProxyLazy.h"
 
-@implementation BTKInjectorProxy{
-    id<BTKInjectorProvider> _provider;
+@implementation BTKInjectorProxyLazy{
+    BTKInjectorProviderBase* _provider;
 }
 
-- (instancetype) initWithProvider : (id<BTKInjectorProvider>) provider
+- (instancetype) initWithProvider : (BTKInjectorProviderBase*) provider;
 {
     _provider = provider;
     return self;

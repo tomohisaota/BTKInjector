@@ -16,6 +16,19 @@
     BOOL _injecting;
 }
 
+@synthesize targetProtocol = _targetProtocol;
+@synthesize injector = _injector;
+
+- (instancetype) initWithProtocol : (Protocol*) targetProtocol
+{
+    self = [super init];
+    if(!self){
+        return nil;
+    }
+    _targetProtocol = targetProtocol;
+    return self;
+}
+
 - (id)get
 {
     // 1st check without synchronized

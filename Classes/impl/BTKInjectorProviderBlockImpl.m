@@ -7,17 +7,12 @@
 //
 
 #import "BTKInjectorProviderBlockImpl.h"
-#import "BTKInjectorProtocolOverrideProxy.h"
+#import "BTKInjectorProxyProtocolOverride.h"
 
 @implementation BTKInjectorProviderBlockImpl{
     id _obj;
     BOOL _forceConform;
     Protocol *_protocol;
-}
-
-- (id)init
-{
-    return [self initWithProtocol:nil forceConform:NO getBlock:nil];
 }
 
 - (instancetype) initWithProtocol : (Protocol*) protocol
@@ -41,13 +36,12 @@
 
 - (id)getImpl
 {
+    id obj = self.getBlock(self.injector);
     if(_forceConform){
-        return [[BTKInjectorProtocolOverrideProxy alloc] initWithTarget:self.getBlock(self.injector)
-                                                               protocol:_protocol];
+        obj = [[BTKInjectorProxyProtocolOverride alloc] initWithTarget:obj
+                                                              protocol:_protocol];
     }
-    else{
-        return self.getBlock(self.injector);
-    }
+    return obj;
 }
 
 @end

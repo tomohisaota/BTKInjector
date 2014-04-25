@@ -27,7 +27,6 @@ static id<BTKInjector> globalInjector;
 
 + (void) setupGlobalInjector : (void(^)(id<BTKMutableInjector> mInjector))initBlock
 {
-    NSLog(@"Setting Global Injector");
     @synchronized(self){
         if(globalInjector != nil){
             [NSException raise:NSInternalInconsistencyException

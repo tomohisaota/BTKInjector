@@ -6,9 +6,9 @@
 //  Copyright (c) 2014 Tomohisa Ota. All rights reserved.
 //
 
-#import "BTKInjectorProtocolOverrideProxy.h"
+#import "BTKInjectorProxyProtocolOverride.h"
 
-@implementation BTKInjectorProtocolOverrideProxy{
+@implementation BTKInjectorProxyProtocolOverride{
     id _target;
     Protocol *_protocol;
 }

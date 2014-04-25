@@ -40,61 +40,21 @@
          forceConform : (BOOL) forceConform
       toProviderBlock : (id(^)(id<BTKInjector> injector))getBlock
 {
-    [self bind:[[BTKInjectorProviderBlockImpl alloc] initWithProtocol : protocol
-                                                         forceConform : forceConform
-                                                             getBlock : getBlock]];
-}
-
-- (void) bindProvider : (id<BTKInjectorProvider>)provider
-{
-    if(![provider conformsToProtocol:@protocol(BTKInjectorProvider)]){
+    if(protocol == nil){
         [NSException raise:NSInternalInconsistencyException
-                    format:@"Provider Binding %@ does not confirm to protocol %@",
-         NSStringFromClass(provider.class),
-         NSStringFromProtocol(@protocol(BTKInjectorProvider))];
-        return;
-    }
-    [self bind:provider];
-}
-
-- (void) bindFactory : (id<BTKInjectorFactory>)factory
-{
-    if(![factory conformsToProtocol:@protocol(BTKInjectorFactory)]){
-        [NSException raise:NSInternalInconsistencyException
-                    format:@"Factory Binding %@ does not confirm to protocol %@",
-         NSStringFromClass(factory.class),
-         NSStringFromProtocol(@protocol(BTKInjectorFactory))];
-        return;
-    }
-    [self bind:factory];
-}
-
-- (void) bind : (id<BTKInjectorBinding>)binding
-{
-    if(binding.targetProtocol == nil){
-        [NSException raise:NSInternalInconsistencyException
-                    format:@"Target protocol for binding %@ cannot be nil",
-         NSStringFromClass(binding.class)];
+                    format:@"Target protocol cannot be nil"];
         return;
     }
     @synchronized(self){
-        NSString *key = NSStringFromProtocol(binding.targetProtocol);
+        NSString *key = NSStringFromProtocol(protocol);
         if([_bindDictionary objectForKey:key]){
             [NSException raise:NSInternalInconsistencyException
                         format:@"Duplicated binding for %@", key];
             return;
         }
-        _bindDictionary[key] = binding;
-    }
-}
-
-- (void) removeBindingForProtocol : (Protocol *)protocol
-{
-    if(protocol == nil){
-        return;
-    }
-    @synchronized(self){
-        [_bindDictionary removeObjectForKey:NSStringFromProtocol(protocol)];
+        _bindDictionary[key] = [[BTKInjectorProviderBlockImpl alloc] initWithProtocol : protocol
+                                                                         forceConform : forceConform
+                                                                             getBlock : getBlock];
     }
 }
 
@@ -103,44 +63,9 @@
 // Mutable injector is used only for building injector.
 // So there's no need to tune performance
 
-- (id) instanceFor : (Protocol *)protocol
+- (id) proxyFor : (Protocol *)protocol
 {
-    return [self.copy instanceForProtocol:protocol];
-}
-
-- (id)proxyFor :(Protocol *)protocol
-{
-    return [self.copy proxyForProtocol:protocol];
-}
-
-- (id<BTKInjectorProvider>) providerFor : (Protocol *)protocol
-{
-    return [self.copy providerForProtocol:protocol];
-}
-
-- (id<BTKInjectorFactory>) factoryFor : (Protocol *)protocol
-{
-    return [self.copy factoryForProtocol:protocol];
-}
-
-- (id) instanceForProtocol : (Protocol *)protocol
-{
-    return [self instanceFor:protocol];
-}
-
-- (id) proxyForProtocol : (Protocol *)protocol
-{
-    return [self proxyFor:protocol];
-}
-
-- (id) providerForProtocol : (Protocol *)protocol
-{
-    return [self providerFor:protocol];
-}
-
-- (id) factoryForProtocol : (Protocol *)protocol
-{
-    return [self factoryFor:protocol];
+    return [self.copy proxyFor:protocol];
 }
 
 #pragma mark NSCopying

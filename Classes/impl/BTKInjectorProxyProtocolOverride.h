@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@interface BTKInjectorProtocolOverrideProxy : NSProxy
+@interface BTKInjectorProxyProtocolOverride : NSProxy
 
 - (instancetype) initWithTarget : (id) target
                        protocol : (Protocol*)protocol;

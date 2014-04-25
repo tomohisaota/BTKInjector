@@ -9,8 +9,6 @@
 #import <Foundation/Foundation.h>
 
 @protocol BTKInjector;
-@protocol BTKInjectorProvider;
-@protocol BTKInjectorFactory;
 
 @protocol BTKMutableInjector <BTKInjector>
 
@@ -20,11 +18,5 @@
 - (void) bindProtocol : (Protocol *)protocol
          forceConform : (BOOL) forceConform
       toProviderBlock : (id(^)(id<BTKInjector> injector))getBlock;
-
-- (void) bindProvider : (id<BTKInjectorProvider>)provider;
-
-- (void) bindFactory : (id<BTKInjectorFactory>)factory;
-
-- (void) removeBindingForProtocol : (Protocol *)protocol;
 
 @end

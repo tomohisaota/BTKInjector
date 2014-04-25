@@ -8,7 +8,7 @@
 
 #import "BTKInjectorImpl.h"
 #import "BTKMutableInjectorImpl.h"
-#import "BTKInjectorProxy.h"
+#import "BTKInjectorProxyLazy.h"
 
 @implementation BTKInjectorImpl{
     NSDictionary *_bindDictionary;
@@ -26,83 +26,16 @@
         _bindDictionary = bindDictionary == nil ? @{} : bindDictionary.copy;
     }
     // Inject injector
-    [_bindDictionary enumerateKeysAndObjectsUsingBlock:^(NSString* key, id<BTKInjectorBinding> binding, BOOL *stop) {
-        if(![binding conformsToProtocol:@protocol(BTKInjectorBinding)]){
-            [NSException raise:NSInternalInconsistencyException
-                        format:@"Binding for %@ does not confirm to protocol %@",
-                                    key,
-                                    NSStringFromProtocol(@protocol(BTKInjectorBinding))];
-        }
+    [_bindDictionary enumerateKeysAndObjectsUsingBlock:^(NSString* key, BTKInjectorProviderBase* binding, BOOL *stop) {
         binding.injector = self;
     }];
     return self;
 }
 
-- (id) instanceFor : (Protocol *)protocol
+- (id) proxyFor : (Protocol *)protocol
 {
-    return ((id<BTKInjectorProvider>)[self providerFor:protocol]).get;
-}
-
-- (id) proxyFor : (Protocol *)protocol;
-{
-    return [[BTKInjectorProxy alloc] initWithProvider:[self providerFor:protocol]];
-}
-
-- (id<BTKInjectorProvider>) providerFor : (Protocol *)protocol
-{
-    id<BTKInjectorProvider> provider = (id<BTKInjectorProvider>)[self bindingFor:protocol];
-    if(![provider conformsToProtocol:@protocol(BTKInjectorProvider)]){
-        [NSException raise:NSInternalInconsistencyException
-                    format:@"Provider Binding for %@ does not confirm to protocol %@",
-                                    NSStringFromProtocol(protocol),
-                                    NSStringFromProtocol(@protocol(BTKInjectorProvider))];
-        return nil;
-    }
-    return provider;
-}
-
-- (id<BTKInjectorFactory>) factoryFor : (Protocol *)protocol
-{
-    id<BTKInjectorFactory> factory = (id<BTKInjectorFactory>)[self bindingFor:protocol];
-    if(![factory conformsToProtocol:@protocol(BTKInjectorFactory)]){
-        [NSException raise:NSInternalInconsistencyException
-                    format:@"Factory Binding for %@ does not confirm to protocol %@",
-                                    NSStringFromProtocol(protocol),
-                                    NSStringFromProtocol(@protocol(BTKInjectorFactory))];
-        return nil;
-    }
-    return factory;
-}
-
-- (id<BTKInjectorBinding>) bindingFor : (Protocol *)protocol;
-{
-    id<BTKInjectorBinding> binding = _bindDictionary[NSStringFromProtocol(protocol)];
-    if(binding == nil){
-        [NSException raise:NSInternalInconsistencyException
-                    format:@"Binding not found for %@", NSStringFromProtocol(protocol)];
-        return nil;
-    }
-    return binding;
-}
-
-- (id) instanceForProtocol : (Protocol *)protocol
-{
-    return [self instanceFor:protocol];
-}
-
-- (id) proxyForProtocol : (Protocol *)protocol
-{
-    return [self proxyFor:protocol];
-}
-
-- (id) providerForProtocol : (Protocol *)protocol
-{
-    return [self providerFor:protocol];
-}
-
-- (id) factoryForProtocol : (Protocol *)protocol
-{
-    return [self factoryFor:protocol];
+    BTKInjectorProviderBase* provider = _bindDictionary[NSStringFromProtocol(protocol)];
+    return [[BTKInjectorProxyLazy alloc] initWithProvider:provider];
 }
 
 #pragma mark NSCopying
