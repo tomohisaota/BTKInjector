@@ -34,6 +34,16 @@
 	return sig;
 }
 
+- (void)setValue:(id)value forUndefinedKey:(NSString *)key
+{
+    return [((NSObject*)_provider.get) setValue:value forKey:key];
+}
+
+- (id)valueForUndefinedKey:(NSString *)key
+{
+    return [((NSObject*)_provider.get) valueForKey:key];
+}
+
 - (BOOL)conformsToProtocol:(Protocol *)aProtocol
 {
     return [_provider.get conformsToProtocol:aProtocol];

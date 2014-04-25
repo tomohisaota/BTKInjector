@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EA63AEB01909ED5100C85A44 /* BTKInjectorKVC.m in Sources */ = {isa = PBXBuildFile; fileRef = EA63AEAF1909ED5100C85A44 /* BTKInjectorKVC.m */; };
 		EA7B872A1907AF53007105D5 /* BTKInjectorProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = EA7B87291907AF53007105D5 /* BTKInjectorProxy.m */; };
 		EA818E8319072FEB000E123C /* BTKInjectorBindingBase.m in Sources */ = {isa = PBXBuildFile; fileRef = EA818E7919072FEB000E123C /* BTKInjectorBindingBase.m */; };
 		EA818E8419072FEB000E123C /* BTKInjectorFactoryBase.m in Sources */ = {isa = PBXBuildFile; fileRef = EA818E7A19072FEB000E123C /* BTKInjectorFactoryBase.m */; };
@@ -54,6 +55,7 @@
 /* Begin PBXFileReference section */
 		EA2E2ECA190742FC00D97B40 /* BTKMutableInjector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BTKMutableInjector.h; path = ../../Classes/BTKMutableInjector.h; sourceTree = "<group>"; };
 		EA2E2ECB1907439300D97B40 /* BTKGlobalInjector.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = BTKGlobalInjector.h; path = ../../Classes/BTKGlobalInjector.h; sourceTree = "<group>"; };
+		EA63AEAF1909ED5100C85A44 /* BTKInjectorKVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTKInjectorKVC.m; sourceTree = "<group>"; };
 		EA7B87281907AF53007105D5 /* BTKInjectorProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BTKInjectorProxy.h; path = ../../Classes/impl/BTKInjectorProxy.h; sourceTree = "<group>"; };
 		EA7B87291907AF53007105D5 /* BTKInjectorProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BTKInjectorProxy.m; path = ../../Classes/impl/BTKInjectorProxy.m; sourceTree = "<group>"; };
 		EA818E7919072FEB000E123C /* BTKInjectorBindingBase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BTKInjectorBindingBase.m; path = ../../Classes/impl/BTKInjectorBindingBase.m; sourceTree = "<group>"; };
@@ -176,6 +178,7 @@
 			isa = PBXGroup;
 			children = (
 				EAE583ED190641B00028686F /* BTKInjectorFactoryTests.m */,
+				EA63AEAF1909ED5100C85A44 /* BTKInjectorKVC.m */,
 				EAE583AE1904B1A90028686F /* BTKInjectorProviderTests.m */,
 				EAE583CE190601AC0028686F /* BTKTestProtocol.h */,
 				EAE583CF190601EA0028686F /* BTKTestProtocol1Impl.h */,
@@ -320,6 +323,7 @@
 				EAE583EC19063F5F0028686F /* BTKTestProtocol2FactoryImpl.m in Sources */,
 				EAE583D1190601EA0028686F /* BTKTestProtocol1Impl.m in Sources */,
 				EAE583D4190601F90028686F /* BTKTestProtocol2Impl.m in Sources */,
+				EA63AEB01909ED5100C85A44 /* BTKInjectorKVC.m in Sources */,
 				EAE583E3190629EB0028686F /* BTKTestProtocol3Impl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
