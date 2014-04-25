@@ -93,24 +93,44 @@
 // Mutable injector is used only for building injector.
 // So there's no need to tune performance
 
-- (id) instanceForProtocol : (Protocol *)protocol
+- (id) instanceFor : (Protocol *)protocol
 {
     return [self.copy instanceForProtocol:protocol];
 }
 
-- (id)proxyForProtocol:(Protocol *)protocol
+- (id)proxyFor :(Protocol *)protocol
 {
     return [self.copy proxyForProtocol:protocol];
 }
 
-- (id<BTKInjectorProvider>) providerForProtocol : (Protocol *)protocol
+- (id<BTKInjectorProvider>) providerFor : (Protocol *)protocol
 {
     return [self.copy providerForProtocol:protocol];
 }
 
-- (id<BTKInjectorFactory>) factoryForProtocol : (Protocol *)protocol
+- (id<BTKInjectorFactory>) factoryFor : (Protocol *)protocol
 {
     return [self.copy factoryForProtocol:protocol];
+}
+
+- (id) instanceForProtocol : (Protocol *)protocol
+{
+    return [self instanceFor:protocol];
+}
+
+- (id) proxyForProtocol : (Protocol *)protocol
+{
+    return [self proxyFor:protocol];
+}
+
+- (id) providerForProtocol : (Protocol *)protocol
+{
+    return [self providerFor:protocol];
+}
+
+- (id) factoryForProtocol : (Protocol *)protocol
+{
+    return [self factoryFor:protocol];
 }
 
 #pragma mark NSCopying

@@ -85,22 +85,22 @@
     return binding;
 }
 
-- (id) instanceForProtocol : (Protocol *)protocol __deprecated_msg("use instanceFor instead.")
+- (id) instanceForProtocol : (Protocol *)protocol
 {
     return [self instanceFor:protocol];
 }
 
-- (id) proxyForProtocol : (Protocol *)protocol __deprecated_msg("use proxyFor instead.")
+- (id) proxyForProtocol : (Protocol *)protocol
 {
     return [self proxyFor:protocol];
 }
 
-- (id) providerForProtocol : (Protocol *)protocol __deprecated_msg("use providerFor instead.")
+- (id) providerForProtocol : (Protocol *)protocol
 {
     return [self providerFor:protocol];
 }
 
-- (id) factoryForProtocol : (Protocol *)protocol __deprecated_msg("use factoryFor instead.")
+- (id) factoryForProtocol : (Protocol *)protocol
 {
     return [self factoryFor:protocol];
 }
