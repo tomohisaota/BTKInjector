@@ -37,7 +37,7 @@
 
                 if(![_obj conformsToProtocol:self.targetProtocol]){
                     [NSException raise:NSInternalInconsistencyException
-                                format:@"Object from %@ provider does not confirm to its protocol", self.description];
+                                format:@"Object from %@ provider does not conforms to its protocol", self.description];
                     
                 }
             }

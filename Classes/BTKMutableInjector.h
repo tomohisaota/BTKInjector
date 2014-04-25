@@ -17,6 +17,10 @@
 - (void) bindProtocol : (Protocol *)protocol
       toProviderBlock : (id(^)(id<BTKInjector> injector))getBlock;
 
+- (void) bindProtocol : (Protocol *)protocol
+         forceConform : (BOOL) forceConform
+      toProviderBlock : (id(^)(id<BTKInjector> injector))getBlock;
+
 - (void) bindProvider : (id<BTKInjectorProvider>)provider;
 
 - (void) bindFactory : (id<BTKInjectorFactory>)factory;

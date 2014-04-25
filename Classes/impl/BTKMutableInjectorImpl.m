@@ -31,8 +31,18 @@
 - (void) bindProtocol : (Protocol *)protocol
       toProviderBlock : (id(^)(id<BTKInjector> injector))getBlock
 {
-    [self bind:[[BTKInjectorProviderBlockImpl alloc] initWithProtocol:protocol
-                                                        getBlock:getBlock]];
+    [self bindProtocol:protocol
+          forceConform:NO
+       toProviderBlock:getBlock];
+}
+
+- (void) bindProtocol : (Protocol *)protocol
+         forceConform : (BOOL) forceConform
+      toProviderBlock : (id(^)(id<BTKInjector> injector))getBlock
+{
+    [self bind:[[BTKInjectorProviderBlockImpl alloc] initWithProtocol : protocol
+                                                         forceConform : forceConform
+                                                             getBlock : getBlock]];
 }
 
 - (void) bindProvider : (id<BTKInjectorProvider>)provider

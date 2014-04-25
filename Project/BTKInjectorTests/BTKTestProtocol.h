@@ -51,6 +51,19 @@
 
 @end
 
+// For Duch Typing Test, same signature as BTKTestProtocol1
+@protocol BTKTestProtocol4 <NSObject>
+
+@property id<BTKTestProtocol2> protocol2;
+@property id<BTKTestProtocol2Provider> protocol2Provider;
+
+@property id<BTKTestProtocol3> protocol3;
+@property id<BTKTestProtocol3Provider> protocol3Provider;
+
+- (NSString*) test1;
+
+@end
+
 @protocol BTKTestProtocol1Provider <NSObject>
 
 - (id<BTKTestProtocol1>)get;

@@ -16,6 +16,8 @@
 		EA818E8719072FEB000E123C /* BTKInjectorProviderBase.m in Sources */ = {isa = PBXBuildFile; fileRef = EA818E7E19072FEB000E123C /* BTKInjectorProviderBase.m */; };
 		EA818E8819072FEB000E123C /* BTKInjectorProviderBlockImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = EA818E8019072FEB000E123C /* BTKInjectorProviderBlockImpl.m */; };
 		EA818E8919072FEB000E123C /* BTKMutableInjectorImpl.m in Sources */ = {isa = PBXBuildFile; fileRef = EA818E8219072FEB000E123C /* BTKMutableInjectorImpl.m */; };
+		EA9CB4C6190A91D500BB63C8 /* BTKInjectorDuckTypingTests.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9CB4C5190A91D500BB63C8 /* BTKInjectorDuckTypingTests.m */; };
+		EA9CB4C9190A932000BB63C8 /* BTKInjectorProtocolOverrideProxy.m in Sources */ = {isa = PBXBuildFile; fileRef = EA9CB4C8190A932000BB63C8 /* BTKInjectorProtocolOverrideProxy.m */; };
 		EAE583931904B1A90028686F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE583921904B1A90028686F /* Foundation.framework */; };
 		EAE583A11904B1A90028686F /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE583A01904B1A90028686F /* XCTest.framework */; };
 		EAE583A21904B1A90028686F /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EAE583921904B1A90028686F /* Foundation.framework */; };
@@ -68,6 +70,9 @@
 		EA818E8019072FEB000E123C /* BTKInjectorProviderBlockImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BTKInjectorProviderBlockImpl.m; path = ../../Classes/impl/BTKInjectorProviderBlockImpl.m; sourceTree = "<group>"; };
 		EA818E8119072FEB000E123C /* BTKMutableInjectorImpl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BTKMutableInjectorImpl.h; path = ../../Classes/impl/BTKMutableInjectorImpl.h; sourceTree = "<group>"; };
 		EA818E8219072FEB000E123C /* BTKMutableInjectorImpl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BTKMutableInjectorImpl.m; path = ../../Classes/impl/BTKMutableInjectorImpl.m; sourceTree = "<group>"; };
+		EA9CB4C5190A91D500BB63C8 /* BTKInjectorDuckTypingTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTKInjectorDuckTypingTests.m; sourceTree = "<group>"; };
+		EA9CB4C7190A932000BB63C8 /* BTKInjectorProtocolOverrideProxy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BTKInjectorProtocolOverrideProxy.h; path = ../../Classes/impl/BTKInjectorProtocolOverrideProxy.h; sourceTree = "<group>"; };
+		EA9CB4C8190A932000BB63C8 /* BTKInjectorProtocolOverrideProxy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BTKInjectorProtocolOverrideProxy.m; path = ../../Classes/impl/BTKInjectorProtocolOverrideProxy.m; sourceTree = "<group>"; };
 		EAE5838F1904B1A90028686F /* libBTKInjector.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libBTKInjector.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		EAE583921904B1A90028686F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		EAE583961904B1A90028686F /* BTKInjector-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BTKInjector-Prefix.pch"; sourceTree = "<group>"; };
@@ -177,6 +182,7 @@
 		EAE583A81904B1A90028686F /* BTKInjectorTests */ = {
 			isa = PBXGroup;
 			children = (
+				EA9CB4C5190A91D500BB63C8 /* BTKInjectorDuckTypingTests.m */,
 				EAE583ED190641B00028686F /* BTKInjectorFactoryTests.m */,
 				EA63AEAF1909ED5100C85A44 /* BTKInjectorKVC.m */,
 				EAE583AE1904B1A90028686F /* BTKInjectorProviderTests.m */,
@@ -208,6 +214,8 @@
 			children = (
 				EA818E7B19072FEB000E123C /* BTKGlobalInjector.m */,
 				EA818E7919072FEB000E123C /* BTKInjectorBindingBase.m */,
+				EA9CB4C7190A932000BB63C8 /* BTKInjectorProtocolOverrideProxy.h */,
+				EA9CB4C8190A932000BB63C8 /* BTKInjectorProtocolOverrideProxy.m */,
 				EA818E7A19072FEB000E123C /* BTKInjectorFactoryBase.m */,
 				EA818E7C19072FEB000E123C /* BTKInjectorImpl.h */,
 				EA818E7D19072FEB000E123C /* BTKInjectorImpl.m */,
@@ -305,6 +313,7 @@
 			files = (
 				EA818E8319072FEB000E123C /* BTKInjectorBindingBase.m in Sources */,
 				EA818E8619072FEB000E123C /* BTKInjectorImpl.m in Sources */,
+				EA9CB4C9190A932000BB63C8 /* BTKInjectorProtocolOverrideProxy.m in Sources */,
 				EA818E8819072FEB000E123C /* BTKInjectorProviderBlockImpl.m in Sources */,
 				EA818E8919072FEB000E123C /* BTKMutableInjectorImpl.m in Sources */,
 				EA818E8419072FEB000E123C /* BTKInjectorFactoryBase.m in Sources */,
@@ -321,6 +330,7 @@
 				EAE583EE190641B00028686F /* BTKInjectorFactoryTests.m in Sources */,
 				EAE583AF1904B1A90028686F /* BTKInjectorProviderTests.m in Sources */,
 				EAE583EC19063F5F0028686F /* BTKTestProtocol2FactoryImpl.m in Sources */,
+				EA9CB4C6190A91D500BB63C8 /* BTKInjectorDuckTypingTests.m in Sources */,
 				EAE583D1190601EA0028686F /* BTKTestProtocol1Impl.m in Sources */,
 				EAE583D4190601F90028686F /* BTKTestProtocol2Impl.m in Sources */,
 				EA63AEB01909ED5100C85A44 /* BTKInjectorKVC.m in Sources */,

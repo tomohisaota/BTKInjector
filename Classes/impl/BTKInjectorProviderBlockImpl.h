@@ -14,6 +14,7 @@
 @property(copy,readonly,nonatomic) id (^getBlock)(id<BTKInjector> injector);
 
 - (instancetype) initWithProtocol : (Protocol*) protocol
+                     forceConform : (BOOL) forceConform
                          getBlock : (id (^)(id<BTKInjector> injector)) getBlock;
 
 @end
