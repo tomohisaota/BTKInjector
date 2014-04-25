@@ -14,10 +14,6 @@
 
 - (instancetype) initWithProvider : (id<BTKInjectorProvider>) provider
 {
-    self = [super init];
-    if(!self){
-        return nil;
-    }
     _provider = provider;
     return self;
 }
@@ -27,26 +23,7 @@
 }
 
 -(NSMethodSignature*)methodSignatureForSelector:(SEL)selector {
-	NSMethodSignature *sig = [super methodSignatureForSelector:selector];
-	if (!sig) {
-		sig = [_provider.get methodSignatureForSelector:selector];
-	}
-	return sig;
-}
-
-- (void)setValue:(id)value forUndefinedKey:(NSString *)key
-{
-    return [((NSObject*)_provider.get) setValue:value forKey:key];
-}
-
-- (id)valueForUndefinedKey:(NSString *)key
-{
-    return [((NSObject*)_provider.get) valueForKey:key];
-}
-
-- (BOOL)conformsToProtocol:(Protocol *)aProtocol
-{
-    return [_provider.get conformsToProtocol:aProtocol];
+    return [_provider.get methodSignatureForSelector:selector];
 }
 
 @end

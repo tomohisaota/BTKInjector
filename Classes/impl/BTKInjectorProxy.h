@@ -9,7 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "BTKInjectorProvider.h"
 
-@interface BTKInjectorProxy : NSObject
+@interface BTKInjectorProxy : NSProxy
 
 - (instancetype) initWithProvider : (id<BTKInjectorProvider>) provider;
 
