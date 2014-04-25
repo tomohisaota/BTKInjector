@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "BTKInjector"
-  s.version          = "1.1.2"
+  s.version          = "1.1.3"
   s.summary          = "DI Framework for Objective-C"
   s.description      = <<-DESC
                        Simple DI(Dependency Injection) Framework designed for Objective C 
