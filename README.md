@@ -1,129 +1,97 @@
 # BTKInjector
 
-BTKInjector is Dependency Injection Framework for Objective C. It supports Singleton Provider and Factory binding by protocol. 
+BTKInjector is Dependency Injection Framework for Objective C. It is designed to do one thing well. **Injecting singleton instance with dependencies.**
 
-Binding
+## What is unique about BTKInjector?
+If you're familir with DI, you may think that DI container will create object, and inject dependencies. BTKInjector does not do either of them. Instead, BTKInjector helps you create object with dependencies.
 
-```objc:BTKMutableInjector.h
-@protocol BTKMutableInjector <BTKInjector>
-- (void) bindProtocol : (Protocol *)protocol
-      toProviderBlock : (id(^)(id<BTKInjector> injector))getBlock;
-- (void) bindProvider : (id<BTKInjectorProvider>)provider;
-- (void) bindFactory : (id<BTKInjectorFactory>)factory;
-- (void) removeBindingForProtocol : (Protocol *)protocol;
-@end
+## Proxy -> Provider -> Instance
+Let's say you have Protocol1 and Protocol2 depending each other. You can write provider block as follow.
+
+```objc:Example
+ [mInjector bindProtocol:@protocol(Protocol1)
+                toProviderBlock:^id(id<BTKInjector> i) {
+                    Protocol1Impl *o = [Protocol1Impl new];
+                    o.protocol2 = [i proxyFor:@protocol(Protocol2)];
+                    return o;
+                }];
+ [mInjector bindProtocol:@protocol(Protocol2)
+                toProviderBlock:^id(id<BTKInjector> i) {
+                    Protocol2Impl *o = [Protocol2Impl new];
+                    o.protocol1 = [i proxyFor:@protocol(Protocol1)];
+                    return o;
+                }];
 ```
+It is hard to build those object because of chicken or egg problem. But BTKInjector solve the problem by injecting lazy loading proxy object. Injected proxy does not load dependency until necessary, but acts just like instance.
 
-Injecting
+Injector and Proxy is carefully designed to support **multi-threading environment without any lock.**
+
+## Interfaces
+Protocol defintion is self-explaining.
 
 ```objc:BTKInjector.h
 @protocol BTKInjector <NSObject>
-- (id) instanceForProtocol : (Protocol *)protocol;
-- (id) proxyForProtocol : (Protocol *)protocol;
-- (id) providerForProtocol : (Protocol *)protocol;
-- (id) factoryForProtocol : (Protocol *)protocol;
+
+- (id) proxyFor : (Protocol *)protocol;
+
 @end
 ```
 
-## How to install
-BTKInjector is available on [Cocoa Pods](http://cocoapods.org)
+```objc:BTKMutableInjector.
+@protocol BTKMutableInjector <BTKInjector>
 
+- (void) bindProtocol : (Protocol *)protocol
+      toProviderBlock : (id(^)(id<BTKInjector> injector))getBlock;
 
+- (void) bindProtocol : (Protocol *)protocol
+         forceConform : (BOOL) forceConform
+      toProviderBlock : (id(^)(id<BTKInjector> injector))getBlock;
+
+@end
 ```
-pod 'BTKInjector', '~> 1.0.3'
+
+```objc:BTKGlobalInjector.h
+@interface BTKGlobalInjector : NSObject
+
++ (id<BTKInjector>) get;
+
++ (void) setupGlobalInjector : (void(^)(id<BTKMutableInjector> mInjector))initBlock;
+
++ (void) removeGlobalInjector;
+
++ (id<BTKInjector>) injectorWithBlock : (void(^)(id<BTKMutableInjector> mInjector))initBlock;
+
+@end
 ```
-or you can use latest code from github
 
-```
-pod 'BTKInjector', :git => 'https://github.com/tomohisaota/BTKInjector.git', :branch => "develop"
-```
-
-## Bind Provider to protocol
-BTKInjector will return same object for given protocol. 
-Your object creation code **get called only once**.
-
-### By provider block
-
+## Global injector
+Just like other DI container, you can setup global injector as entry point.
 
 ```objc
     [BTKGlobalInjector setupGlobalInjector:^(id<BTKMutableInjector> mInjector) {
         [mInjector bindProtocol:@protocol(BTKTestProtocol1)
                 toProviderBlock:^id(id<BTKInjector> i) {
                     BTKTestProtocol1Impl *o = [BTKTestProtocol1Impl new];
-                    o.protocol2Provider = [i providerForProtocol:@protocol(BTKTestProtocol2)];
+                    o.protocol2Provider = [i proxyFor:@protocol(BTKTestProtocol2)];
                     return o;
                 }];
     }];
 ```
 
-### Inject provider
-Inject BTKInjectorProvider, and you can get target instance by calling "get".
+## Factory
+Factory is just a singleton instace to create new instances. You can inject the injector so that factory instance can load any dependency.
 
-### Inject instance
-Syntax sugar. Equivalent to provider injection + "get".
-
-### Inject proxy
-Return proxy object which has reference to provider. It acts just like instance injection, but does not call provider.get until necessary.
-
-## Bind Factory to protocol
-BTKInjector will return newly created object for given protocol. 
-Your object creation code **get called everytime**.
-
-
-Define protocol for Factory.
-
-```objc
-@protocol BTKSampleFactory <NSObject>
-
-- (id<BTKSample>) sampleWithString : (NSString*) str;
-
-@end
-```
-
-Subclass BTKInjectorFactoryBase, and implement your factory protocol.
-
-```objc
-@interface BTKSampleFactoryImpl : BTKInjectorFactoryBase<BTKSampleFactory>
-
-@end
+## How to install
+BTKInjector is available on [Cocoa Pods](http://cocoapods.org)
 
 ```
-
-self.injector get injected automatically.
-You can use the injector to get provider,facotory or instance for any protocol.
-
-```objc
-@implementation BTKSampleFactoryFactoryImpl
-
-- (id)init
-{
-    return [super initWithProtocol:@protocol(BTKSample)];
-}
-
-- (id<BTKSample>) sampleWithString : (NSString*) str
-{
-    return [[BTKSample alloc]initWithString:str
-                                    otherObj:[self.injector instanceForProtocol:@protocol(OtherProtocol)];
-}
-
-@end
+pod 'BTKInjector', '~> 2.0.0'
 ```
+or you can use latest code from github
 
-Register binding to injector.
-
-```objc
-[mInjector bindFactory:[BTKSampleFactoryFactoryImpl new]];
 ```
-
-### Inject factory by protocol
-
-
-
-
-## Circular dependency
-If two components depends on each other in **intialize sequence**, BTKInjector cannot create object. Chicken or egg problem.
-
-Circular dependency after object intialization is totally fine. So inject Proxy or Provider instead of Instance whereever possible.
+pod 'BTKInjector', :git => 'https://github.com/tomohisaota/BTKInjector.git', :branch => "develop"
+```
 
 ## License
 BTKInjector is created and maintained by Tomohisa Ota under the Apache 2.0 license.
