@@ -28,7 +28,7 @@
         [mInjector bindProtocol:@protocol(BTKTestProtocol1)
                 toProviderBlock:^id(id<BTKInjector> i) {
                     BTKTestProtocol1Impl *o = [BTKTestProtocol1Impl new];
-                    id<BTKTestProtocol2Factory> f = [i factoryForProtocol:@protocol(BTKTestProtocol2)];
+                    id<BTKTestProtocol2Factory> f = [i factoryFor:@protocol(BTKTestProtocol2)];
                     o.protocol2 = [f protocol2WithString:@"test4"];
                     return o;
                 }];
@@ -36,7 +36,7 @@
         [mInjector bindProtocol:@protocol(BTKTestProtocol3)
                 toProviderBlock:^id(id<BTKInjector> i) {
                     BTKTestProtocol3Impl *o = [BTKTestProtocol3Impl new];
-                    id<BTKTestProtocol2Factory> f = [i factoryForProtocol:@protocol(BTKTestProtocol2)];
+                    id<BTKTestProtocol2Factory> f = [i factoryFor:@protocol(BTKTestProtocol2)];
                     o.protocol2 = [f protocol2WithString:@"test4"];
                     return o;
                 }];
@@ -45,8 +45,8 @@
 
 - (void)testGlobalInjector
 {
-    id<BTKTestProtocol1> o1 = [[BTKGlobalInjector get]instanceForProtocol:@protocol(BTKTestProtocol1)];
-    id<BTKTestProtocol3> o3 = [[BTKGlobalInjector get]instanceForProtocol:@protocol(BTKTestProtocol3)];
+    id<BTKTestProtocol1> o1 = [[BTKGlobalInjector get]instanceFor:@protocol(BTKTestProtocol1)];
+    id<BTKTestProtocol3> o3 = [[BTKGlobalInjector get]instanceFor:@protocol(BTKTestProtocol3)];
     
     XCTAssertTrue(o1.protocol2 != o3.protocol2);
 }

@@ -27,13 +27,13 @@
         [mInjector bindProtocol:@protocol(BTKTestProtocol1)
                 toProviderBlock:^id(id<BTKInjector> i) {
                     BTKTestProtocol1Impl *o = [BTKTestProtocol1Impl new];
-                    o.protocol2Provider = [i providerForProtocol:@protocol(BTKTestProtocol2)];
+                    o.protocol2Provider = [i providerFor:@protocol(BTKTestProtocol2)];
                     return o;
                 }];
         [mInjector bindProtocol:@protocol(BTKTestProtocol2)
                 toProviderBlock:^id(id<BTKInjector> i) {
                     BTKTestProtocol2Impl *o = [BTKTestProtocol2Impl new];
-                    o.protocol3Provider = [i providerForProtocol:@protocol(BTKTestProtocol3)];
+                    o.protocol3Provider = [i providerFor:@protocol(BTKTestProtocol3)];
                     return o;
                 }];
         [mInjector bindProtocol:@protocol(BTKTestProtocol3)
@@ -46,7 +46,7 @@
 
 - (void)testGlobalInjector
 {
-    id<BTKTestProtocol1> o = [[BTKGlobalInjector get]instanceForProtocol:@protocol(BTKTestProtocol1)];
+    id<BTKTestProtocol1> o = [[BTKGlobalInjector get]instanceFor:@protocol(BTKTestProtocol1)];
     XCTAssertEqual(@"test1", o.test1);
     XCTAssertEqual(@"test2", o.protocol2.test2);
     XCTAssertEqual(@"test3", o.protocol2.protocol3.test3);
@@ -62,23 +62,23 @@
             [mInjector bindProtocol:@protocol(BTKTestProtocol1)
                     toProviderBlock:^id(id<BTKInjector> i) {
                         BTKTestProtocol1Impl *o = [BTKTestProtocol1Impl new];
-                        o.protocol2 = [i instanceForProtocol:@protocol(BTKTestProtocol2)];
+                        o.protocol2 = [i instanceFor:@protocol(BTKTestProtocol2)];
                         return o;
                     }];
             [mInjector bindProtocol:@protocol(BTKTestProtocol2)
                     toProviderBlock:^id(id<BTKInjector> i) {
                         BTKTestProtocol2Impl *o = [BTKTestProtocol2Impl new];
-                        o.protocol3 = [i instanceForProtocol:@protocol(BTKTestProtocol3)];
+                        o.protocol3 = [i instanceFor:@protocol(BTKTestProtocol3)];
                         return o;
                     }];
             [mInjector bindProtocol:@protocol(BTKTestProtocol3)
                     toProviderBlock:^id(id<BTKInjector> i) {
                         BTKTestProtocol3Impl *o = [BTKTestProtocol3Impl new];
-                        o.protocol1 = [i instanceForProtocol:@protocol(BTKTestProtocol1)];
+                        o.protocol1 = [i instanceFor:@protocol(BTKTestProtocol1)];
                         return o;
                     }];
         }];
-        id<BTKTestProtocol1> o = [injector instanceForProtocol:@protocol(BTKTestProtocol1)];
+        id<BTKTestProtocol1> o = [injector instanceFor:@protocol(BTKTestProtocol1)];
         XCTAssertTrue([o conformsToProtocol:@protocol(BTKTestProtocol1)]);
         XCTAssertTrue([o.protocol2 conformsToProtocol:@protocol(BTKTestProtocol2)]);
         XCTAssertTrue([o.protocol2.protocol3 conformsToProtocol:@protocol(BTKTestProtocol3)]);
@@ -101,23 +101,23 @@
         [mInjector bindProtocol:@protocol(BTKTestProtocol1)
                 toProviderBlock:^id(id<BTKInjector> i) {
                     BTKTestProtocol1Impl *o = [BTKTestProtocol1Impl new];
-                    o.protocol2 = [i proxyForProtocol:@protocol(BTKTestProtocol2)];
+                    o.protocol2 = [i proxyFor:@protocol(BTKTestProtocol2)];
                     return o;
                 }];
         [mInjector bindProtocol:@protocol(BTKTestProtocol2)
                 toProviderBlock:^id(id<BTKInjector> i) {
                     BTKTestProtocol2Impl *o = [BTKTestProtocol2Impl new];
-                    o.protocol3 = [i proxyForProtocol:@protocol(BTKTestProtocol3)];
+                    o.protocol3 = [i proxyFor:@protocol(BTKTestProtocol3)];
                     return o;
                 }];
         [mInjector bindProtocol:@protocol(BTKTestProtocol3)
                 toProviderBlock:^id(id<BTKInjector> i) {
                     BTKTestProtocol3Impl *o = [BTKTestProtocol3Impl new];
-                    o.protocol1 = [i proxyForProtocol:@protocol(BTKTestProtocol1)];
+                    o.protocol1 = [i proxyFor:@protocol(BTKTestProtocol1)];
                     return o;
                 }];
     }];
-    id<BTKTestProtocol1> o = [injector instanceForProtocol:@protocol(BTKTestProtocol1)];
+    id<BTKTestProtocol1> o = [injector instanceFor:@protocol(BTKTestProtocol1)];
     XCTAssertTrue([o conformsToProtocol:@protocol(BTKTestProtocol1)]);
     XCTAssertTrue([o.protocol2 conformsToProtocol:@protocol(BTKTestProtocol2)]);
     XCTAssertTrue([o.protocol2.protocol3 conformsToProtocol:@protocol(BTKTestProtocol3)]);
@@ -134,23 +134,23 @@
         [mInjector bindProtocol:@protocol(BTKTestProtocol1)
                 toProviderBlock:^id(id<BTKInjector> i) {
                     BTKTestProtocol1Impl *o = [BTKTestProtocol1Impl new];
-                    o.protocol2Provider = [i providerForProtocol:@protocol(BTKTestProtocol2)];
+                    o.protocol2Provider = [i providerFor:@protocol(BTKTestProtocol2)];
                     return o;
                 }];
         [mInjector bindProtocol:@protocol(BTKTestProtocol2)
                 toProviderBlock:^id(id<BTKInjector> i) {
                     BTKTestProtocol2Impl *o = [BTKTestProtocol2Impl new];
-                    o.protocol3Provider = [i providerForProtocol:@protocol(BTKTestProtocol3)];
+                    o.protocol3Provider = [i providerFor:@protocol(BTKTestProtocol3)];
                     return o;
                 }];
         [mInjector bindProtocol:@protocol(BTKTestProtocol3)
                 toProviderBlock:^id(id<BTKInjector> i) {
                     BTKTestProtocol3Impl *o = [BTKTestProtocol3Impl new];
-                    o.protocol1Provider = [i providerForProtocol:@protocol(BTKTestProtocol1)];
+                    o.protocol1Provider = [i providerFor:@protocol(BTKTestProtocol1)];
                     return o;
                 }];
     }];
-    id<BTKTestProtocol1> o = [injector instanceForProtocol:@protocol(BTKTestProtocol1)];
+    id<BTKTestProtocol1> o = [injector instanceFor:@protocol(BTKTestProtocol1)];
     XCTAssertTrue([o conformsToProtocol:@protocol(BTKTestProtocol1)]);
     XCTAssertTrue([o.protocol2 conformsToProtocol:@protocol(BTKTestProtocol2)]);
     XCTAssertTrue([o.protocol2.protocol3 conformsToProtocol:@protocol(BTKTestProtocol3)]);

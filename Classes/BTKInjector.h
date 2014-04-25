@@ -11,16 +11,22 @@
 @protocol BTKInjector <NSObject>
 
 /// Get instance for given protocol. syntax sugar for provider + get
-- (id) instanceForProtocol : (Protocol *)protocol;
+- (id) instanceFor : (Protocol *)protocol;
 
 /// Get proxy for given protocol. proxy object calls provider when needed
-- (id) proxyForProtocol : (Protocol *)protocol;
+- (id) proxyFor : (Protocol *)protocol;
 
 /// Get provider for given protocol. calling provider returns singleton instance
-- (id) providerForProtocol : (Protocol *)protocol;
+- (id) providerFor : (Protocol *)protocol;
 
 /// Get factory for given protocol. calling factory create new instance
-- (id) factoryForProtocol : (Protocol *)protocol;
+- (id) factoryFor : (Protocol *)protocol;
+
+
+- (id) instanceForProtocol : (Protocol *)protocol __deprecated_msg("use instanceFor instead.");
+- (id) proxyForProtocol : (Protocol *)protocol __deprecated_msg("use proxyFor instead.");
+- (id) providerForProtocol : (Protocol *)protocol __deprecated_msg("use providerFor instead.");
+- (id) factoryForProtocol : (Protocol *)protocol __deprecated_msg("use factoryFor instead.");
 
 @end
 

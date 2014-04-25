@@ -20,8 +20,8 @@
 - (id<BTKTestProtocol2>) protocol2WithString : (NSString*) str;
 {
     BTKTestProtocol2Impl *o = [BTKTestProtocol2Impl new];
-    o.protocol1Provider = [self.injector providerForProtocol:@protocol(BTKTestProtocol1)];
-    o.protocol3Provider = [self.injector providerForProtocol:@protocol(BTKTestProtocol3)];
+    o.protocol1Provider = [self.injector providerFor:@protocol(BTKTestProtocol1)];
+    o.protocol3Provider = [self.injector providerFor:@protocol(BTKTestProtocol3)];
     return o;
 }
 

@@ -38,19 +38,19 @@
     return self;
 }
 
-- (id) instanceForProtocol : (Protocol *)protocol
+- (id) instanceFor : (Protocol *)protocol
 {
-    return ((id<BTKInjectorProvider>)[self providerForProtocol:protocol]).get;
+    return ((id<BTKInjectorProvider>)[self providerFor:protocol]).get;
 }
 
-- (id) proxyForProtocol : (Protocol *)protocol;
+- (id) proxyFor : (Protocol *)protocol;
 {
-    return [[BTKInjectorProxy alloc] initWithProvider:[self providerForProtocol:protocol]];
+    return [[BTKInjectorProxy alloc] initWithProvider:[self providerFor:protocol]];
 }
 
-- (id<BTKInjectorProvider>) providerForProtocol : (Protocol *)protocol
+- (id<BTKInjectorProvider>) providerFor : (Protocol *)protocol
 {
-    id<BTKInjectorProvider> provider = (id<BTKInjectorProvider>)[self bindingForProtocol:protocol];
+    id<BTKInjectorProvider> provider = (id<BTKInjectorProvider>)[self bindingFor:protocol];
     if(![provider conformsToProtocol:@protocol(BTKInjectorProvider)]){
         [NSException raise:NSInternalInconsistencyException
                     format:@"Provider Binding for %@ does not confirm to protocol %@",
@@ -61,9 +61,9 @@
     return provider;
 }
 
-- (id<BTKInjectorFactory>) factoryForProtocol : (Protocol *)protocol
+- (id<BTKInjectorFactory>) factoryFor : (Protocol *)protocol
 {
-    id<BTKInjectorFactory> factory = (id<BTKInjectorFactory>)[self bindingForProtocol:protocol];
+    id<BTKInjectorFactory> factory = (id<BTKInjectorFactory>)[self bindingFor:protocol];
     if(![factory conformsToProtocol:@protocol(BTKInjectorFactory)]){
         [NSException raise:NSInternalInconsistencyException
                     format:@"Factory Binding for %@ does not confirm to protocol %@",
@@ -74,7 +74,7 @@
     return factory;
 }
 
-- (id<BTKInjectorBinding>) bindingForProtocol : (Protocol *)protocol;
+- (id<BTKInjectorBinding>) bindingFor : (Protocol *)protocol;
 {
     id<BTKInjectorBinding> binding = _bindDictionary[NSStringFromProtocol(protocol)];
     if(binding == nil){
@@ -83,6 +83,26 @@
         return nil;
     }
     return binding;
+}
+
+- (id) instanceForProtocol : (Protocol *)protocol __deprecated_msg("use instanceFor instead.")
+{
+    return [self instanceFor:protocol];
+}
+
+- (id) proxyForProtocol : (Protocol *)protocol __deprecated_msg("use proxyFor instead.")
+{
+    return [self proxyFor:protocol];
+}
+
+- (id) providerForProtocol : (Protocol *)protocol __deprecated_msg("use providerFor instead.")
+{
+    return [self providerFor:protocol];
+}
+
+- (id) factoryForProtocol : (Protocol *)protocol __deprecated_msg("use factoryFor instead.")
+{
+    return [self factoryFor:protocol];
 }
 
 #pragma mark NSCopying
