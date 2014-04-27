@@ -22,9 +22,9 @@ Let's say you have Protocol1 and Protocol2 depending each other. You can write p
                     return o;
                 }];
 ```
-It is hard to build those object because of chicken or egg problem. But BTKInjector solve the problem by injecting lazy loading proxy object. Injected proxy does not load dependency until necessary, but acts just like instance.
+It is hard to build those object because of chicken or egg problem. But BTKInjector solves the problem by injecting lazy loading proxy object. Injected proxy does not load dependency until necessary, but acts just like instance.
 
-Injector and Proxy is carefully designed to support **multi-threading environment without any lock.**
+Injector and Proxy are carefully designed to support **multi-threading environment without any lock.**
 
 ## Interfaces
 Protocol defintion is self-explaining.
@@ -65,7 +65,7 @@ Protocol defintion is self-explaining.
 ```
 
 ## Global injector
-Just like other DI container, you can setup global injector as entry point.
+Just like other DI containers, you can setup global injector as entry point.
 
 ```objc
     [BTKGlobalInjector setupGlobalInjector:^(id<BTKMutableInjector> mInjector) {
@@ -82,7 +82,7 @@ Just like other DI container, you can setup global injector as entry point.
 Factory is just a singleton instace to create new instances. You can inject the injector so that factory instance can load any dependency.
 
 ## How to install
-BTKInjector is available on [Cocoa Pods](http://cocoapods.org)
+BTKInjector is available on [CocoaPods](http://cocoapods.org)
 
 ```
 pod 'BTKInjector', '~> 2.0.0'
