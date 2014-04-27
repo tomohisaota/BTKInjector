@@ -1,0 +1,3 @@
+language: objective-c
+xcode_project: Project/BTKInjector.xcodeproj
+xcode_scheme: BTKInjector
