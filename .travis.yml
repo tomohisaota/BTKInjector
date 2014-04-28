@@ -5,7 +5,6 @@ xcode_scheme: BTKInjector
 xcode_sdk:
   - iphonesimulator7.1
   - iphonesimulator7.0
-  - iphonesimulator6.1
 
 before_install:
   - brew update
