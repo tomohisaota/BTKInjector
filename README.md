@@ -1,5 +1,7 @@
 # BTKInjector
 
+[![Build Status](https://travis-ci.org/tomohisaota/BTKInjector.svg?branch=master)](https://travis-ci.org/tomohisaota/BTKInjector)
+
 BTKInjector is Dependency Injection Framework for Objective C. It is designed to do one thing well. **Injecting singleton instance with dependencies.**
 
 ## What is unique about BTKInjector?
