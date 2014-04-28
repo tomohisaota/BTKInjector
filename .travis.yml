@@ -1,3 +1,7 @@
 language: objective-c
 xcode_project: Project/BTKInjector.xcodeproj
 xcode_scheme: BTKInjector
+xcode_sdk:
+  - iphonesimulator7.0
+  - iphonesimulator6.1
+  - iphonesimulator6.0
