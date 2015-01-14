@@ -26,4 +26,12 @@
     return [_provider.get methodSignatureForSelector:selector];
 }
 
+- (BOOL)conformsToProtocol:(Protocol *)aProtocol
+{
+    if(_provider.targetProtocol == aProtocol){
+        return YES;
+    }
+    return [_provider.get conformsToProtocol:aProtocol];
+}
+
 @end
