@@ -26,6 +26,8 @@
 		EAE583D1190601EA0028686F /* BTKTestProtocol1Impl.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE583D0190601EA0028686F /* BTKTestProtocol1Impl.m */; };
 		EAE583D4190601F90028686F /* BTKTestProtocol2Impl.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE583D3190601F90028686F /* BTKTestProtocol2Impl.m */; };
 		EAE583E3190629EB0028686F /* BTKTestProtocol3Impl.m in Sources */ = {isa = PBXBuildFile; fileRef = EAE583E2190629EB0028686F /* BTKTestProtocol3Impl.m */; };
+		FE3F048F1A65FC4100EE6455 /* BTKInjectorDuckTypingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FE3F048E1A65FC4100EE6455 /* BTKInjectorDuckTypingTests.swift */; };
+		FEAA9ECE1A66062A004D6D19 /* BTKInjectorProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FEAA9ECD1A66062A004D6D19 /* BTKInjectorProviderTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -85,6 +87,9 @@
 		EAE583D3190601F90028686F /* BTKTestProtocol2Impl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTKTestProtocol2Impl.m; sourceTree = "<group>"; };
 		EAE583E1190629EB0028686F /* BTKTestProtocol3Impl.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTKTestProtocol3Impl.h; sourceTree = "<group>"; };
 		EAE583E2190629EB0028686F /* BTKTestProtocol3Impl.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTKTestProtocol3Impl.m; sourceTree = "<group>"; };
+		FE3F048D1A65FC4000EE6455 /* BTKInjectorTests-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BTKInjectorTests-Bridging-Header.h"; sourceTree = "<group>"; };
+		FE3F048E1A65FC4100EE6455 /* BTKInjectorDuckTypingTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTKInjectorDuckTypingTests.swift; sourceTree = "<group>"; };
+		FEAA9ECD1A66062A004D6D19 /* BTKInjectorProviderTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BTKInjectorProviderTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +167,7 @@
 		EAE583A81904B1A90028686F /* BTKInjectorTests */ = {
 			isa = PBXGroup;
 			children = (
+				FE3F048C1A65FC0000EE6455 /* Swift */,
 				EA9CB4C5190A91D500BB63C8 /* BTKInjectorDuckTypingTests.m */,
 				EA63AEAF1909ED5100C85A44 /* BTKInjectorKVC.m */,
 				EAE583AE1904B1A90028686F /* BTKInjectorProviderTests.m */,
@@ -204,6 +210,16 @@
 				EA818E8219072FEB000E123C /* BTKMutableInjectorImpl.m */,
 			);
 			name = impl;
+			sourceTree = "<group>";
+		};
+		FE3F048C1A65FC0000EE6455 /* Swift */ = {
+			isa = PBXGroup;
+			children = (
+				FE3F048D1A65FC4000EE6455 /* BTKInjectorTests-Bridging-Header.h */,
+				FE3F048E1A65FC4100EE6455 /* BTKInjectorDuckTypingTests.swift */,
+				FEAA9ECD1A66062A004D6D19 /* BTKInjectorProviderTests.swift */,
+			);
+			path = Swift;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -304,8 +320,10 @@
 				EAE583AF1904B1A90028686F /* BTKInjectorProviderTests.m in Sources */,
 				EA9CB4C6190A91D500BB63C8 /* BTKInjectorDuckTypingTests.m in Sources */,
 				EAE583D1190601EA0028686F /* BTKTestProtocol1Impl.m in Sources */,
+				FE3F048F1A65FC4100EE6455 /* BTKInjectorDuckTypingTests.swift in Sources */,
 				EAE583D4190601F90028686F /* BTKTestProtocol2Impl.m in Sources */,
 				EA63AEB01909ED5100C85A44 /* BTKInjectorKVC.m in Sources */,
+				FEAA9ECE1A66062A004D6D19 /* BTKInjectorProviderTests.swift in Sources */,
 				EAE583E3190629EB0028686F /* BTKTestProtocol3Impl.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -363,7 +381,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -394,7 +412,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -427,6 +445,7 @@
 		EAE583B61904B1A90028686F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -439,7 +458,10 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "BTKInjectorTests/BTKInjectorTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BTKInjectorTests/Swift/BTKInjectorTests-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Debug;
@@ -447,6 +469,7 @@
 		EAE583B71904B1A90028686F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
 					"$(inherited)",
@@ -455,7 +478,9 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BTKInjector/BTKInjector-Prefix.pch";
 				INFOPLIST_FILE = "BTKInjectorTests/BTKInjectorTests-Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "BTKInjectorTests/Swift/BTKInjectorTests-Bridging-Header.h";
 				WRAPPER_EXTENSION = xctest;
 			};
 			name = Release;

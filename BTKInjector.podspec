@@ -1,9 +1,9 @@
 Pod::Spec.new do |s|
   s.name             = "BTKInjector"
-  s.version          = "2.0.1"
-  s.summary          = "DI Framework for Objective-C"
+  s.version          = "2.1.0"
+  s.summary          = "DI Framework for Objective-C/Swift"
   s.description      = <<-DESC
-                       Simple DI(Dependency Injection) Framework designed for Objective C 
+                       Simple DI(Dependency Injection) Framework designed for Objective C/Swift
                        DESC
   s.homepage         = "https://github.com/tomohisaota/BTKInjector"
   s.license          = 'Apache License, Version 2.0'
@@ -11,8 +11,8 @@ Pod::Spec.new do |s|
   s.source           = { :git => "https://github.com/tomohisaota/BTKInjector.git", :tag => s.version.to_s }
   s.social_media_url = 'https://twitter.com/toowitter'
 
-  s.ios.deployment_target = '6.0'
-  s.osx.deployment_target = '10.8'
+  s.ios.deployment_target = '8.0'
+  s.osx.deployment_target = '10.10'
   s.requires_arc = true
 
   s.source_files = 'Classes/**/*.{h,m}'
