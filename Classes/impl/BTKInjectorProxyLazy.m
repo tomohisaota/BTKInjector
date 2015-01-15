@@ -26,4 +26,17 @@
     return [_provider.get methodSignatureForSelector:selector];
 }
 
+- (BOOL)conformsToProtocol:(Protocol *)aProtocol
+{
+    // Swift runtime calls conformsToProtocol earlier than Objective C.
+    // And it causes circular reference problem.
+    // To workaround the issue, skip protocol check for the target protocol.
+    // Target protocol is also checked in BTKInjectorProviderBase.
+    // So there should not be any side effects.
+    if(_provider.targetProtocol == aProtocol){
+        return YES;
+    }
+    return [_provider.get conformsToProtocol:aProtocol];
+}
+
 @end
